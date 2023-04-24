@@ -1,9 +1,11 @@
+import MainScreen from "./Component/MainScreen"
+
 function App() {
 
   return (
-    <>
-      Hello
-    </>
+    <div className="landing-page">
+     <MainScreen/> 
+     </div>
   )
 }
 

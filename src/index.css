@@ -17,7 +17,74 @@
 @media (max-width: 375px) {
   
 }
+body{
+  margin: 0;
+}
+.landing-page{
+  width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.main-screen{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  height: fit-content;
+  margin: auto;
+}
+.manage-area{
+  
+}
+.manage-area label{
+  font-size: 16px;
+  color: var(--grayish-cyan);
+}
+.manage-area .input{
+  position: relative;
 
+}
+.manage-area input{
+  background-color: var(--very-light-grayish-cyan);
+  border: 0;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: right;
+  color: var(--dark-cyan);
+  padding: 10px 20px 10px 40px;
+}
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
 
+.manage-area input:focus,.manage-area input:hover{
+  outline: 2px solid var(--main-color);
+}
+.manage-area img{
+  position: absolute;
+  left: 20px;
+  z-index: 10;
+  top:50%;
+  transform: translateY(-50%);
+}
 
-
+.manage-area .tip-group .button-group{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2,1fr);
+  gap: 10px;
+}
+.manage-area .tip-group .btn{
+  background: var(--dark-cyan);
+    border-radius: 5px;
+    padding: 10px 20px;
+    text-align: center;
+    color: var(--white);
+    cursor: pointer;
+}
+.manage-area .tip-group .btn:hover{
+  background-color: var(--main-color);
+  color: var(--dark-cyan);
+}
