@@ -23,20 +23,30 @@ body{
 .landing-page{
   width: 100%;
     display: flex;
-    justify-content: center;
     align-items: center;
-    height: 100vh;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: var(--light-grayish-cyan);
 }
 .main-screen{
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+  gap: 50px;
+}
+.main-screen .content{
+  display: flex;
   justify-content: center;
   align-items: center;
-  width: fit-content;
-  height: fit-content;
-  margin: auto;
+  background-color: var(--white);
+  border-radius: 10px;
+  padding: 40px;
 }
 .manage-area{
-  
+  display: flex;
+    flex-direction: column;
+    gap: 30px;
 }
 .manage-area label{
   font-size: 16px;
@@ -72,19 +82,35 @@ input[type=number]::-webkit-inner-spin-button {
 
 .manage-area .tip-group .button-group{
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 120px);
   grid-template-rows: repeat(2,1fr);
   gap: 10px;
 }
 .manage-area .tip-group .btn{
   background: var(--dark-cyan);
     border-radius: 5px;
-    padding: 10px 20px;
+    padding: 10px 15px;
     text-align: center;
     color: var(--white);
     cursor: pointer;
+    
 }
-.manage-area .tip-group .btn:hover{
+.manage-area .tip-group .btn:hover,.btn.choosed{
   background-color: var(--main-color);
   color: var(--dark-cyan);
+}
+.manage-area .tip-group .custom-btn,.manage-area .tip-group .custom-btn:hover{
+  background: var(--very-light-grayish-cyan);
+  color: var(--dark-grayish-cyan);
+  border: 0;
+}
+.manage-area .tip-group .custom-btn:focus{
+  outline: 2px solid var(--main-color);
+  color: var(--dark-cyan);
+}
+input.error{
+border: 1px solid #b87b6a;
+}
+label input.error{
+  display: inline;
 }

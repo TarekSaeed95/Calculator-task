@@ -21,7 +21,7 @@ function ManageArea() {
             <div className="btn">15%</div>
             <div className="btn">20%</div>
             <div className="btn">20%</div>
-            <div className="custom-btn">Custom</div>
+            <input className="btn custom-btn" placeholder="Custom"/>
         </div>
         </div>
         <div className="people">
