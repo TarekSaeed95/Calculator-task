@@ -19,6 +19,9 @@ Users should be able to:
 - Calculate the correct tip and total cost of the bill per person
 
 ### Screenshot
+![screenshots](/screenshots/1.jpeg)
+![screenshots](/screenshots/2.jpeg)
+![screenshots](/screenshots/3.jpeg)
 
 (./screenshots/1.jpeg),(./screenshots/2.jpeg),(./screenshots/3.jpeg)
 
