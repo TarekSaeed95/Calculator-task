@@ -1,6 +1,3 @@
-import React from 'react'
-
-
 function ResultArea({tipAmount,total,resetHandler,isDisabled}) {
   return (
     <section className="result-area">

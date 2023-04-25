@@ -28,7 +28,7 @@ function MainScreen() {
   return (
     <main className="main-screen">
       <img src={logo} alt="logo" />
-      <article className="content">
+      <section className="content">
         <ManageArea
           bill={bill}
           people={people}
@@ -46,7 +46,7 @@ function MainScreen() {
           resetHandler={resetHandler}
           isDisabled={isDisabled}
         />
-      </article>
+      </section>
     </main>
   );
 }
