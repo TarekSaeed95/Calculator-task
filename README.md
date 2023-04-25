@@ -23,8 +23,6 @@ Users should be able to:
 ![screenshots](/screenshots/2.jpeg)
 ![screenshots](/screenshots/3.jpeg)
 
-(./screenshots/1.jpeg),(./screenshots/2.jpeg),(./screenshots/3.jpeg)
-
 ### Links
 
 - Solution URL: (https://www.frontendmentor.io/solutions/calculatorchallenge-Oub1GZHTHm)
