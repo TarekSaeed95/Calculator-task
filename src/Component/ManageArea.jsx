@@ -13,7 +13,9 @@ function ManageArea({
 }) {
   const allBtns = document.querySelectorAll(".btn");
   const CustomTip = useRef();
+  const tips=[5,10,15,20,25]
 
+  //handle inputs depend on their state name
   const fieldHandler = (e, setState) => {
     setState(+e.target.value);
     setIsDisabled(false);
@@ -25,6 +27,8 @@ function ManageArea({
       btn.classList.remove("choosed");
     });
   };
+
+  //handle tip buttons if any of them clicked
   const tipClickHandler = (e) => {
     clearTips(e);
     let allBtns = e.currentTarget.parentNode.childNodes;
@@ -34,7 +38,7 @@ function ManageArea({
     e.currentTarget.classList.add("choosed");
   };
 
-
+//check every render if reseted button is clicked
   useEffect(() => {
     if (isReseted) {
       allBtns.forEach((btn) => btn.classList.remove("choosed"));
@@ -42,6 +46,16 @@ function ManageArea({
       setIsReset(false);
     }
   });
+
+//create tip buttons dynamically
+  const tipBtns=tips.map((tip,index)=>{
+    let tipNum="tip"+(index+1)
+ return ( <div className={`${tipNum} btn `} onClick={tipClickHandler}>
+          <label htmlFor={tipNum}>{tip}%</label>
+          <input type="radio" name="tip" value={tip} id={tipNum} hidden />
+        </div>
+        )
+})
 
   return (
     <section className="manage-area">
@@ -76,26 +90,7 @@ function ManageArea({
 
           }}
         >
-          <div className="tip1 btn " onClick={tipClickHandler}>
-            <label htmlFor="tip1">5%</label>
-            <input type="radio" name="tip" value="5" id="tip1" hidden />
-          </div>
-          <div className="tip2 btn " onClick={tipClickHandler}>
-            <input type="radio" name="tip" value="10" id="tip2" hidden />
-            <label htmlFor="tip2">10%</label>
-          </div>
-          <div className="tip3 btn" onClick={tipClickHandler}>
-            <input type="radio" name="tip" value="15" id="tip3" hidden />
-            <label htmlFor="tip3">15%</label>
-          </div>
-          <div className="tip4 btn" onClick={tipClickHandler}>
-            <input type="radio" name="tip" value="20" id="tip4" hidden />
-            <label htmlFor="tip4">20%</label>
-          </div>
-          <div className="tip5 btn" onClick={tipClickHandler}>
-            <input type="radio" name="tip" value="25" id="tip5" hidden />
-            <label htmlFor="tip5">25%</label>
-          </div>
+          {tipBtns}
           <div className="custom-btn btn" onClick={tipClickHandler}>
             <input name="tip" placeholder="Custom" ref={CustomTip} />
           </div>
