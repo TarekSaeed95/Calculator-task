@@ -13,7 +13,7 @@ function ManageArea({
 }) {
   const allBtns = document.querySelectorAll(".btn");
   const CustomTip = useRef();
-  const tips=[5,10,15,20,25]
+  const tips = [5, 10, 15, 20, 25];
 
   //handle inputs depend on their state name
   const fieldHandler = (e, setState) => {
@@ -21,7 +21,6 @@ function ManageArea({
     setIsDisabled(false);
   };
 
-  
   const clearTips = () => {
     allBtns.forEach((btn) => {
       btn.classList.remove("choosed");
@@ -38,7 +37,7 @@ function ManageArea({
     e.currentTarget.classList.add("choosed");
   };
 
-//check every render if reseted button is clicked
+  //check every render if reseted button is clicked
   useEffect(() => {
     if (isReseted) {
       allBtns.forEach((btn) => btn.classList.remove("choosed"));
@@ -47,15 +46,16 @@ function ManageArea({
     }
   });
 
-//create tip buttons dynamically
-  const tipBtns=tips.map((tip,index)=>{
-    let tipNum="tip"+(index+1)
- return ( <div className={`${tipNum} btn `} onClick={tipClickHandler}>
-          <label htmlFor={tipNum}>{tip}%</label>
-          <input type="radio" name="tip" value={tip} id={tipNum} hidden />
-        </div>
-        )
-})
+  //create tip buttons dynamically
+  const tipBtns = tips.map((tip, index) => {
+    let tipNum = "tip" + (index + 1);
+    return (
+      <div className={`${tipNum} btn `} onClick={tipClickHandler}>
+        <label htmlFor={tipNum}>{tip}%</label>
+        <input type="radio" name="tip" value={tip} id={tipNum} hidden />
+      </div>
+    );
+  });
 
   return (
     <section className="manage-area">
@@ -66,7 +66,7 @@ function ManageArea({
         </div>
 
         <div className="input">
-          <img src={dollar} />
+          <img src={dollar} alt="dollar-sign"/>
           <input
             id="bill"
             type="number"
@@ -86,8 +86,7 @@ function ManageArea({
         <form
           className="button-group"
           onChange={(e) => {
-            fieldHandler(e,setTip)
-
+            fieldHandler(e, setTip);
           }}
         >
           {tipBtns}
@@ -102,7 +101,7 @@ function ManageArea({
           {people == 0 && <span className="error">can't be zero</span>}
         </div>
         <div className="input">
-          <img src={person} alt="" />
+          <img src={person} alt="people-sign" />
           <input
             id="people"
             type="number"

@@ -1,20 +1,20 @@
 import ManageArea from "./ManageArea";
 import ResultArea from "./ResultArea";
 import logo from "../assets/images/logo.svg";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 function MainScreen() {
   const [tip, setTip] = useState(0);
   const [people, setPeople] = useState();
   const [bill, setBill] = useState();
   const [tipAmount, setTipAmount] = useState(0);
   const [total, setTotal] = useState(0);
-  const [isReseted,setIsReset]=useState(false)
-  const [isDisabled, setIsDisabled]=useState(true)
+  const [isReseted, setIsReset] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(true);
   useEffect(() => {
-      if (bill > 0 && tip > 0 && people > 0) {
-        setTipAmount(((bill * (tip / 100)) / people).toFixed(2));
-        setTotal(((bill * (tip / 100)) / people + bill / people).toFixed(2));
-      }
+    if (bill > 0 && tip > 0 && people > 0) {
+      setTipAmount(((bill * (tip / 100)) / people).toFixed(2));
+      setTotal(((bill * (tip / 100)) / people + bill / people).toFixed(2));
+    }
   }, [bill, people, tip]);
   const resetHandler = () => {
     setTip(null);
@@ -23,7 +23,7 @@ function MainScreen() {
     setTotal(0);
     setTipAmount(0);
     setIsReset(true);
-    setIsDisabled(true)
+    setIsDisabled(true);
   };
   return (
     <main className="main-screen">
