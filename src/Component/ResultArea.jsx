@@ -3,8 +3,8 @@ import React from 'react'
 
 function ResultArea({tipAmount,total,resetHandler,isDisabled}) {
   return (
-    <div className="result-area">
-      <div className="tip-amount">
+    <section className="result-area">
+      <section className="tip-amount">
           <div className="text">
             <div className="head">Tip Amount</div>
             <p>/ person</p>
@@ -13,8 +13,8 @@ function ResultArea({tipAmount,total,resetHandler,isDisabled}) {
             ${tipAmount==0?"0.00":tipAmount}
             
           </div>
-      </div>
-      <div className="total">
+      </section>
+      <section className="total">
           <div className="text">
             <div className="head">Total</div>
             <p>/ person</p>
@@ -22,14 +22,13 @@ function ResultArea({tipAmount,total,resetHandler,isDisabled}) {
           <div className="total-result">
           ${total==0?"0.00":total}
           </div>
-      </div>
+      </section>
       <button  onClick={resetHandler}
-      
       className={isDisabled?"disabled":null}
       >
         Reset
       </button>
-    </div>
+    </section>
   )
 }
 

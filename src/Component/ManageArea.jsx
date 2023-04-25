@@ -14,16 +14,18 @@ function ManageArea({
   const allBtns = document.querySelectorAll(".btn");
   const CustomTip = useRef();
 
-  const clearTips = (e) => {
-    allBtns.forEach((btn) => {
-      btn.classList.remove("choosed");
-    });
-  };
   const fieldHandler = (e, setState) => {
     setState(+e.target.value);
     setIsDisabled(false);
   };
-  const clickHandler = (e) => {
+
+  
+  const clearTips = () => {
+    allBtns.forEach((btn) => {
+      btn.classList.remove("choosed");
+    });
+  };
+  const tipClickHandler = (e) => {
     clearTips(e);
     let allBtns = e.currentTarget.parentNode.childNodes;
     allBtns.forEach((btn) => {
@@ -31,6 +33,8 @@ function ManageArea({
     });
     e.currentTarget.classList.add("choosed");
   };
+
+
   useEffect(() => {
     if (isReseted) {
       allBtns.forEach((btn) => btn.classList.remove("choosed"));
@@ -38,9 +42,10 @@ function ManageArea({
       setIsReset(false);
     }
   });
+
   return (
-    <div className="manage-area">
-      <div className="bill">
+    <section className="manage-area">
+      <section className="bill">
         <div className="text">
           <label htmlFor="bill">Bill</label>
           {bill == 0 && <span className="error">can't be zero</span>}
@@ -59,8 +64,8 @@ function ManageArea({
             className={bill == 0 ? "error" : null}
           />
         </div>
-      </div>
-      <div className="tip-group">
+      </section>
+      <section className="tip-group">
         <label className="main-label" htmlFor="tip">
           Select tip %
         </label>
@@ -71,32 +76,32 @@ function ManageArea({
 
           }}
         >
-          <div className="tip1 btn " onClick={clickHandler}>
+          <div className="tip1 btn " onClick={tipClickHandler}>
             <label htmlFor="tip1">5%</label>
             <input type="radio" name="tip" value="5" id="tip1" hidden />
           </div>
-          <div className="tip2 btn " onClick={clickHandler}>
+          <div className="tip2 btn " onClick={tipClickHandler}>
             <input type="radio" name="tip" value="10" id="tip2" hidden />
             <label htmlFor="tip2">10%</label>
           </div>
-          <div className="tip3 btn" onClick={clickHandler}>
+          <div className="tip3 btn" onClick={tipClickHandler}>
             <input type="radio" name="tip" value="15" id="tip3" hidden />
             <label htmlFor="tip3">15%</label>
           </div>
-          <div className="tip4 btn" onClick={clickHandler}>
+          <div className="tip4 btn" onClick={tipClickHandler}>
             <input type="radio" name="tip" value="20" id="tip4" hidden />
             <label htmlFor="tip4">20%</label>
           </div>
-          <div className="tip5 btn" onClick={clickHandler}>
+          <div className="tip5 btn" onClick={tipClickHandler}>
             <input type="radio" name="tip" value="25" id="tip5" hidden />
             <label htmlFor="tip5">25%</label>
           </div>
-          <div className="custom-btn btn" onClick={clickHandler}>
+          <div className="custom-btn btn" onClick={tipClickHandler}>
             <input name="tip" placeholder="Custom" ref={CustomTip} />
           </div>
         </form>
-      </div>
-      <div className="people">
+      </section>
+      <section className="people">
         <div className="text">
           <label htmlFor="people">Number of People</label>
           {people == 0 && <span className="error">can't be zero</span>}
@@ -114,8 +119,8 @@ function ManageArea({
             className={people == 0 ? "error" : null}
           />
         </div>
-      </div>
-    </div>
+      </section>
+    </section>
   );
 }
 

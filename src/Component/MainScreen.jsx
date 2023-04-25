@@ -2,7 +2,6 @@ import ManageArea from "./ManageArea";
 import ResultArea from "./ResultArea";
 import logo from "../assets/images/logo.svg";
 import { useState,useEffect } from "react";
-import {  } from "react";
 function MainScreen() {
   const [tip, setTip] = useState(0);
   const [people, setPeople] = useState();
@@ -27,9 +26,9 @@ function MainScreen() {
     setIsDisabled(true)
   };
   return (
-    <div className="main-screen">
-      <img src={logo} alt="" />
-      <div className="content">
+    <main className="main-screen">
+      <img src={logo} alt="logo" />
+      <article className="content">
         <ManageArea
           bill={bill}
           people={people}
@@ -47,8 +46,8 @@ function MainScreen() {
           resetHandler={resetHandler}
           isDisabled={isDisabled}
         />
-      </div>
-    </div>
+      </article>
+    </main>
   );
 }
 
