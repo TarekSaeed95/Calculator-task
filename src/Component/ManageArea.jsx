@@ -53,7 +53,7 @@ useEffect(()=>{
         </div>
       </div>
       <div className="tip-group">
-        <label htmlFor="tip">Select tip %</label>
+        <label className="main-label" htmlFor="tip">Select tip %</label>
         <form className="button-group"  onChange={(e)=>{setTip(e.target.value)
         
         setIsDisabled(false)

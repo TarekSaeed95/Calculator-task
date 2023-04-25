@@ -14,9 +14,6 @@
   font-size: 24px;
 
 }
-@media (max-width: 375px) {
-  
-}
 body{
   margin: 0;
 }
@@ -48,11 +45,14 @@ body{
 .manage-area{
   display: flex;
     flex-direction: column;
-    gap: 30px;
+    min-height: 400px;
+    justify-content: space-between;
+    box-sizing: border-box;
 }
-.manage-area label{
+.manage-area label,.manage-area .tip-group label.main-label{
   font-size: 16px;
   color: var(--dark-grayish-cyan);
+  padding: 0;
 }
 .manage-area .input{
   position: relative;
@@ -161,15 +161,16 @@ span.error{
     border-radius: 10px;
     padding: 40px;
     padding-top: 60px;
-    gap: 40px;
     display: flex;
     flex-direction: column;
-    width: 350px;
+    width: 420px;
+    min-height: 400px;
+    box-sizing: border-box;
+    justify-content: space-between;
 }
 .result-area .tip-amount,.result-area .total {
   display: flex;
     justify-content: space-between;
-    gap: 80px;
 }
 .result-area .text .head{
 font-size: 16px;
@@ -186,7 +187,7 @@ font-size: 16px;
 }
 .result-area button{
   width: 100%;
-  margin-top: 100px;
+  margin-top: 60px;
   border-radius: 5px;
   border: 0;
   color: var(--dark-cyan);
@@ -202,4 +203,30 @@ font-size: 16px;
 }
 .result-area  button.disabled{
   background-color: #0d686d
+}
+@media (max-width: 375px) {
+  .main-screen{
+    width: 100%;
+    padding-inline: 0;
+    padding-bottom: 0;
+  }
+  .main-screen .content{
+    flex-direction: column;
+    width: 100%;
+    box-sizing: border-box;
+    padding-inline: 25px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  .manage-area{
+    max-width: 100%;
+    gap: 25px;
+  }
+  .manage-area .tip-group .button-group{
+    grid-template-columns: repeat(2,1fr);
+  }
+  .result-area{
+    padding-inline: 20px;
+    width: 100%;
+  }
 }
