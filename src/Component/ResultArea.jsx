@@ -25,7 +25,7 @@ function ResultArea({tipAmount,total,resetHandler,isDisabled}) {
       </div>
       <button  onClick={resetHandler}
       
-      className={isDisabled&&"disabled"}
+      className={isDisabled?"disabled":null}
       >
         Reset
       </button>

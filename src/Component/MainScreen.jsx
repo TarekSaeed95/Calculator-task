@@ -1,9 +1,8 @@
-import React from "react";
 import ManageArea from "./ManageArea";
 import ResultArea from "./ResultArea";
 import logo from "../assets/images/logo.svg";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState,useEffect } from "react";
+import {  } from "react";
 function MainScreen() {
   const [tip, setTip] = useState(0);
   const [people, setPeople] = useState();
@@ -19,9 +18,9 @@ function MainScreen() {
       }
   }, [bill, people, tip]);
   const resetHandler = () => {
-    setTip(0);
-    setPeople();
-    setBill();
+    setTip(null);
+    setPeople(null);
+    setBill(null);
     setTotal(0);
     setTipAmount(0);
     setIsReset(true);
