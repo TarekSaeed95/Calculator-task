@@ -20,6 +20,7 @@ body{
     background-color: var(--light-grayish-cyan);
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 .main-screen{
   display: flex;
