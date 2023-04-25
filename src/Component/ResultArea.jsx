@@ -1,6 +1,7 @@
 import React from 'react'
 
-function ResultArea() {
+
+function ResultArea({tipAmount,total,resetHandler}) {
   return (
     <div className="result-area">
       <div className="tip-amount">
@@ -9,7 +10,8 @@ function ResultArea() {
             <p>/ person</p>
           </div>
           <div className="tip-result">
-            $0.00
+            ${tipAmount==0?"0.00":tipAmount}
+            
           </div>
       </div>
       <div className="total">
@@ -18,10 +20,10 @@ function ResultArea() {
             <p>/ person</p>
           </div>
           <div className="total-result">
-            $0.00
+          ${total==0?"0.00":total}
           </div>
       </div>
-      <button className="reset">
+      <button className="reset" onClick={resetHandler}>
         Reset
       </button>
     </div>
