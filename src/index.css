@@ -18,6 +18,8 @@ body{
 .landing-page{
     min-height: 100vh;
     background-color: var(--light-grayish-cyan);
+    display: flex;
+    justify-content: center;
 }
 .main-screen{
   display: flex;
