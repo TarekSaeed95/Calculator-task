@@ -6,26 +6,26 @@ import { useState } from "react";
 import { useEffect } from "react";
 function MainScreen() {
   const [tip, setTip] = useState(0);
-  const [people, setPeople] = useState(0);
-  const [bill, setBill] = useState(0);
+  const [people, setPeople] = useState();
+  const [bill, setBill] = useState();
   const [tipAmount, setTipAmount] = useState(0);
   const [total, setTotal] = useState(0);
   const [isReseted,setIsReset]=useState(false)
+  const [isDisabled, setIsDisabled]=useState(true)
   useEffect(() => {
-    if (bill != NaN && people != NaN && tip != NaN) {
       if (bill > 0 && tip > 0 && people > 0) {
         setTipAmount(((bill * (tip / 100)) / people).toFixed(2));
         setTotal(((bill * (tip / 100)) / people + bill / people).toFixed(2));
       }
-    }
   }, [bill, people, tip]);
   const resetHandler = () => {
     setTip(0);
-    setPeople(0);
-    setBill(0);
+    setPeople();
+    setBill();
     setTotal(0);
     setTipAmount(0);
     setIsReset(true);
+    setIsDisabled(true)
   };
   return (
     <div className="main-screen">
@@ -40,11 +40,13 @@ function MainScreen() {
           setBill={setBill}
           isReseted={isReseted}
           setIsReset={setIsReset}
+          setIsDisabled={setIsDisabled}
         />
         <ResultArea
           total={total}
           tipAmount={tipAmount}
           resetHandler={resetHandler}
+          isDisabled={isDisabled}
         />
       </div>
     </div>

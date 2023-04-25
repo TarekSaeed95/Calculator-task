@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-function ResultArea({tipAmount,total,resetHandler}) {
+function ResultArea({tipAmount,total,resetHandler,isDisabled}) {
   return (
     <div className="result-area">
       <div className="tip-amount">
@@ -23,7 +23,10 @@ function ResultArea({tipAmount,total,resetHandler}) {
           ${total==0?"0.00":total}
           </div>
       </div>
-      <button className="reset" onClick={resetHandler}>
+      <button  onClick={resetHandler}
+      
+      className={isDisabled&&"disabled"}
+      >
         Reset
       </button>
     </div>

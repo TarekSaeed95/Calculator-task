@@ -4,7 +4,7 @@ import person from "../assets/images/icon-person.svg";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useRef } from "react";
-function ManageArea({ setBill, setTip, setPeople, bill, people ,isReseted,setIsReset}) {
+function ManageArea({ setBill, setTip, setPeople, bill, people ,isReseted,setIsReset,setIsDisabled}) {
     const allBtns=document.querySelectorAll(".btn")
     const CustomTip=useRef()
     
@@ -30,20 +30,35 @@ useEffect(()=>{
   return (
     <div className="manage-area">
       <div className="bill">
+      <div className="text">
+
         <label htmlFor="bill">Bill</label>
+  {bill==0&&<span className="error">can't be zero</span>}
+      </div>
+
         <div className="input">
           <img src={dollar} />
           <input
             id="bill"
             type="number"
-            onChange={(e) => setBill(+e.target.value)}
-            value={bill}
+            onChange={(e) => {setBill(+e.target.value)
+            setIsDisabled(false)
+            }
+            }
+            value={bill==null?"":bill}
+            placeholder="0"
+            className={bill==0&&"error"}
+
           />
         </div>
       </div>
       <div className="tip-group">
         <label htmlFor="tip">Select tip %</label>
-        <form className="button-group"  onChange={(e)=>setTip(e.target.value)} >
+        <form className="button-group"  onChange={(e)=>{setTip(e.target.value)
+        
+        setIsDisabled(false)
+        
+        }} >
           <div className="tip1 btn " onClick={clickHandler}>
             <label htmlFor="tip1"  >
               5%
@@ -81,14 +96,28 @@ useEffect(()=>{
         </form>
       </div>
       <div className="people">
+        <div className="text">
+
         <label htmlFor="people">Number of People</label>
+          {people==0&&<span className="error">can't be zero</span>}
+        </div>
         <div className="input">
           <img src={person} alt="" />
           <input
-            id="bill"
+            id="people"
             type="number"
-            value={people}
-            onChange={(e) => setPeople(+e.target.value)}
+            value={people==null?"":people}
+            placeholder="0"
+            onChange={(e) =>{ setPeople(+e.target.value)
+            
+              setIsDisabled(false)
+            
+            
+            }
+
+          
+          }
+            className={people==0&&"error"}
           />
         </div>
       </div>
