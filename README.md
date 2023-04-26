@@ -19,12 +19,13 @@ Users should be able to:
 - Calculate the correct tip and total cost of the bill per person
 
 ### Screenshot
-
-(./screenshots/1.jpeg),(./screenshots/2.jpeg),(./screenshots/3.jpeg)
+![screenshots](/screenshots/1.jpeg)
+![screenshots](/screenshots/2.jpeg)
+![screenshots](/screenshots/3.jpeg)
 
 ### Links
 
-- Solution URL: (https://your-solution-url.com)
+- Solution URL: (https://www.frontendmentor.io/solutions/calculatorchallenge-Oub1GZHTHm)
 - Live Site URL: (https://calculator-task-six.vercel.app/)
 
 ## My process
