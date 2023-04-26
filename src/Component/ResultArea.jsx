@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 
 function ResultArea({ tipAmount, total, setIsReseted, isReseted }) {
   const [isDisabled, setIsDisabled] = useState(true);
@@ -8,7 +9,7 @@ function ResultArea({ tipAmount, total, setIsReseted, isReseted }) {
       setIsDisabled(true);
     } else setIsDisabled(false);
   }, [isReseted]);
-  
+
   return (
     <section className="result-area">
       <section className="tip-amount">
@@ -36,3 +37,9 @@ function ResultArea({ tipAmount, total, setIsReseted, isReseted }) {
 }
 
 export default ResultArea;
+ResultArea.propTypes = {
+  tipAmount: PropTypes.number,
+  total: PropTypes.number,
+  isReseted: PropTypes.boolean,
+  setIsReseted: PropTypes.func,
+};

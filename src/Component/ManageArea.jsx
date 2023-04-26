@@ -1,87 +1,101 @@
 import dollar from "../assets/images/icon-dollar.svg";
 import person from "../assets/images/icon-person.svg";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import PropTypes from "prop-types";
+
 function ManageArea({ setTipAmount, setTotal, isReseted, setIsReseted }) {
   const [calcManager, setCalcManager] = useState({
     tip: 0,
     people: null,
     bill: null,
   });
+  const [currentTip, setCurrentTip] = useState();
+  const [customTip, setCustomTip] = useState("");
+
   const { tip, people, bill } = calcManager;
-  const tips = [5, 10, 15, 20, 25];
-  const [currentTip,setCurrentTip] = useState();
-  const [customTip,setCustomTip] = useState("");
+  const tips = useMemo(() => [5, 10, 15, 20, 25, customTip], [customTip]);
 
   useEffect(() => {
     if (bill > 0 && tip > -1 && people > 0) {
-      // const tipAmount=tip==0?0:(bill * (tip/100)) / 1 / people
-      let tipAmount=0;
-      let total=0;
-      if(tip==0){
-         tipAmount=0
-        total=bill  / people + bill / people
-      }else {
-        tipAmount=(bill * (tip/100)) / people
-        total=tipAmount+bill/people
+      let tipAmount = 0;
+      let total = 0;
+      if (tip == 0) {
+        tipAmount = 0;
+        total = bill / people + bill / people;
+      } else {
+        tipAmount = (bill * (tip / 100)) / people;
+        total = tipAmount + bill / people;
       }
-
-      setTipAmount(tipAmount)
-      setTotal(total)
-      // setTotal=
-      // tip==0?setTotal((bill  / people + bill / people)):setTotal((bill *  (tip / 100)) / people + bill / people);
+      setTipAmount(tipAmount);
+      setTotal(total);
     }
-  }, [calcManager]);
+  }, [bill, people, setTipAmount, setTotal, tip]);
 
   //check every render if reseted button is clicked
   useEffect(() => {
-    
     if (isReseted) {
       setCalcManager({ tip: 0, people: null, bill: null });
-      setCurrentTip()
+      setCurrentTip();
       setTotal(0);
       setTipAmount(0);
-      setCustomTip("")
+      setCustomTip("");
     }
-  }, [isReseted]);
+  }, [isReseted, setTipAmount, setTotal]);
 
   //handle tip buttons if any of them clicked
-  const tipClickHandler = (i) => {
-    setCustomTip("")
-    setIsReseted(false);
-    setCurrentTip(i)
-  };
 
-  const customTipHandler=(e)=>{
-    {
-      setCustomTip(e.target.value)
-      setIsReseted(false)
-      setCurrentTip()
-    }
-  }
+  const tipClickHandler = useCallback(
+    (e, i) => {
+      setCalcManager((prev) => ({ ...prev, tip: +e.target.value }));
+      setIsReseted(false);
+      setCurrentTip(i);
+      if (i === tips.length - 1) {
+        setCustomTip(e.target.value);
+      } else {
+        setCustomTip("");
+      }
+    },
+    [setIsReseted, tips.length]
+  );
+
   //create tip buttons dynamically
-  const tipBtns =
-  useMemo(()=>
-    tips.map((tip, index) => {
-      let tipNum = "tip" + (index + 1);
-      return (
-        <div key={index} className={`${tipNum} btn ${currentTip === index ? "choosed": ""}`} 
-        onClick={()=>{tipClickHandler(index)
-        }}
-        >
-          <label htmlFor={tipNum}>{tip}%</label>
-          <input type="radio" name="tip" value={tip} id={tipNum} hidden />
-        </div>
-      );
-    })
-  ,[currentTip])
-
+  const tipBtns = useMemo(
+    () =>
+      tips.map((tip, index) => {
+        let tipNum = "tip" + (index + 1);
+        return index !== tips.length - 1 ? (
+          <div
+            key={index}
+            className={`${tipNum} btn ${currentTip === index ? "choosed" : ""}`}
+            onClick={(e) => {
+              tipClickHandler(e, index);
+            }}
+          >
+            <label htmlFor={tipNum}>{tip}%</label>
+            <input type="radio" name="tip" value={tip} id={tipNum} hidden />
+          </div>
+        ) : (
+          <div className="custom-btn btn" key={index}>
+            <input
+              name="tip"
+              placeholder="Custom"
+              type="number"
+              min={0}
+              onChange={(e) => tipClickHandler(e, index)}
+              value={tip}
+            />
+          </div>
+        );
+      }),
+    [currentTip, tipClickHandler, tips]
+  );
 
   return (
     <section className="manage-area">
       <section className="bill">
         <div className="text">
           <label htmlFor="bill">Bill</label>
-          {bill === 0 && <span className="error">can't be zero</span>}
+          {bill === 0 && <span className="error">can&apos;t be zero</span>}
         </div>
 
         <div className="input">
@@ -103,30 +117,12 @@ function ManageArea({ setTipAmount, setTotal, isReseted, setIsReseted }) {
         <label className="main-label" htmlFor="tip">
           Select tip %
         </label>
-        <form
-          className="button-group"
-          onChange={(e) => {
-            setCalcManager((prev) => ({ ...prev, tip: e.target.value }));
-            setIsReseted(false);
-          }}
-        >
-          {tipBtns}
-          <div className="custom-btn btn" 
-          >
-            <input name="tip" placeholder="Custom"
-            type="number"
-            min={0}
-            onChange={(e)=>customTipHandler(e)
-          }
-            value={customTip}
-            />
-          </div>
-        </form>
+        <div className="button-group">{tipBtns}</div>
       </section>
       <section className="people">
         <div className="text">
           <label htmlFor="people">Number of People</label>
-          {people === 0 && <span className="error">can't be zero</span>}
+          {people === 0 && <span className="error">can&apos;t be zero</span>}
         </div>
         <div className="input">
           <img src={person} alt="people-sign" />
@@ -136,7 +132,7 @@ function ManageArea({ setTipAmount, setTotal, isReseted, setIsReseted }) {
             value={people === null ? "" : people}
             placeholder="0"
             onChange={(e) => {
-              setCalcManager((prev) => ({ ...prev, people: e.target.value }));
+              setCalcManager((prev) => ({ ...prev, people: +e.target.value }));
               setIsReseted(false);
             }}
             className={people === 0 ? "error" : null}
@@ -148,3 +144,9 @@ function ManageArea({ setTipAmount, setTotal, isReseted, setIsReseted }) {
 }
 
 export default ManageArea;
+ManageArea.propTypes = {
+  setTipAmount: PropTypes.func,
+  setTotal: PropTypes.func,
+  isReseted: PropTypes.boolean,
+  setIsReseted: PropTypes.func,
+};
