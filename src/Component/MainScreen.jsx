@@ -1,7 +1,7 @@
 import ManageArea from "./ManageArea";
 import ResultArea from "./ResultArea";
 import logo from "../assets/images/logo.svg";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 function MainScreen() {
   const [tipAmount, setTipAmount] = useState(0);
   const [total, setTotal] = useState(0);

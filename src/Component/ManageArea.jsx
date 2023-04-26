@@ -13,9 +13,10 @@ function ManageArea({ setTipAmount, setTotal, isReseted, setIsReseted }) {
   const [customTip,setCustomTip] = useState("");
 
   useEffect(() => {
-    if (bill > 0 && tip > 0 && people > 0) {
-      setTipAmount((bill * (tip / 100)) / people);
-      setTotal((bill * (tip / 100)) / people + bill / people);
+    if (bill > 0 && tip > -1 && people > 0) {
+      tip==0?setTipAmount(0):setTipAmount((bill * (tip/100)) / 1 / people);
+      tip==0?setTotal((bill  / people + bill / people)):setTotal((bill *  (tip / 100)) / people + bill / people);
+      // setTotal((bill *  (tip!=0 ? (tip / 100):1)) / people + bill / people);
     }
   }, [calcManager]);
 
@@ -42,7 +43,7 @@ function ManageArea({ setTipAmount, setTotal, isReseted, setIsReseted }) {
     {
       setCustomTip(e.target.value)
       setIsReseted(false)
-        setCurrentTip()
+      setCurrentTip()
     }
   }
   //create tip buttons dynamically
@@ -101,6 +102,8 @@ function ManageArea({ setTipAmount, setTotal, isReseted, setIsReseted }) {
           <div className="custom-btn btn" 
           >
             <input name="tip" placeholder="Custom"
+            type="number"
+            min={0}
             onChange={(e)=>customTipHandler(e)
           }
             value={customTip}
