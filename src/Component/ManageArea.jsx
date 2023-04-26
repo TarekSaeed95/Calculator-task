@@ -1,24 +1,55 @@
 import dollar from "../assets/images/icon-dollar.svg";
 import person from "../assets/images/icon-person.svg";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 function ManageArea({
-  setBill,
-  setTip,
-  setPeople,
-  bill,
-  people,
+  setTipAmount,
+  setTotal,
   isReseted,
-  setIsReset,
-  setIsDisabled,
+  setIsReseted,
 }) {
+  // const [tip, setTip] = useState(0);
+  // const [people, setPeople] = useState();
+  // const [bill, setBill] = useState();
+  const [calcManager,setCalcManager] = useState({
+    tip:0,people:null,bill:null
+  });
+  const {tip,people,bill}=calcManager
+  console.log(tip)
+  console.log(people)
+  console.log(bill)
   const allBtns = document.querySelectorAll(".btn");
   const CustomTip = useRef();
   const tips = [5, 10, 15, 20, 25];
 
+  useEffect(() => {
+    if (bill > 0 && tip > 0 && people > 0) {
+      setTipAmount(((bill * (tip / 100)) / people).toFixed(2));
+      setTotal(((bill * (tip / 100)) / people + bill / people).toFixed(2));
+    }
+  }, [calcManager]);
+
+  //check every render if reseted button is clicked
+  useEffect(() => {
+    if (isReseted) {
+      allBtns.forEach((btn) => btn.classList.remove("choosed"));
+      CustomTip.current.value = null;
+    }
+    if(isReseted){
+      setCalcManager({ tip:0,people:null,bill:null})
+
+    setTotal(0);
+    setTipAmount(0);
+    }
+  },[isReseted]);
   //handle inputs depend on their state name
-  const fieldHandler = (e, setState) => {
-    setState(+e.target.value);
-    setIsDisabled(false);
+  const fieldHandler = (e, state) => {
+
+
+    // setState(+e.target.value);
+    console.log("first")
+    console.log(calcManager)
+    setCalcManager((prev)=>({...prev,state:e.target.value}))
+    setIsReseted(false)
   };
 
   const clearTips = () => {
@@ -29,6 +60,7 @@ function ManageArea({
 
   //handle tip buttons if any of them clicked
   const tipClickHandler = (e) => {
+    setIsReseted(false)
     clearTips(e);
     let allBtns = e.currentTarget.parentNode.childNodes;
     allBtns.forEach((btn) => {
@@ -37,20 +69,11 @@ function ManageArea({
     e.currentTarget.classList.add("choosed");
   };
 
-  //check every render if reseted button is clicked
-  useEffect(() => {
-    if (isReseted) {
-      allBtns.forEach((btn) => btn.classList.remove("choosed"));
-      CustomTip.current.value = null;
-      setIsReset(false);
-    }
-  });
-
   //create tip buttons dynamically
   const tipBtns = tips.map((tip, index) => {
     let tipNum = "tip" + (index + 1);
     return (
-      <div className={`${tipNum} btn `} onClick={tipClickHandler}>
+      <div key={index} className={`${tipNum} btn `} onClick={tipClickHandler}>
         <label htmlFor={tipNum}>{tip}%</label>
         <input type="radio" name="tip" value={tip} id={tipNum} hidden />
       </div>
@@ -62,7 +85,7 @@ function ManageArea({
       <section className="bill">
         <div className="text">
           <label htmlFor="bill">Bill</label>
-          {bill == 0 && <span className="error">can't be zero</span>}
+          {calcManager.bill == 0 && <span className="error">can't be zero</span>}
         </div>
 
         <div className="input">
@@ -71,11 +94,13 @@ function ManageArea({
             id="bill"
             type="number"
             onChange={(e) => {
-              fieldHandler(e, setBill);
-            }}
-            value={bill == null ? "" : bill}
+              setCalcManager((prev)=>({...prev,bill:+e.target.value}))
+              setIsReseted(false)
+            }
+          }
+            value={calcManager.bill == null ? "" : calcManager.bill}
             placeholder="0"
-            className={bill == 0 ? "error" : null}
+            className={calcManager.bill == 0 ? "error" : null}
           />
         </div>
       </section>
@@ -86,7 +111,8 @@ function ManageArea({
         <form
           className="button-group"
           onChange={(e) => {
-            fieldHandler(e, setTip);
+            setCalcManager((prev)=>({...prev,tip:e.target.value}))
+            setIsReseted(false)
           }}
         >
           {tipBtns}
@@ -98,19 +124,20 @@ function ManageArea({
       <section className="people">
         <div className="text">
           <label htmlFor="people">Number of People</label>
-          {people == 0 && <span className="error">can't be zero</span>}
+          {calcManager.people == 0 && <span className="error">can't be zero</span>}
         </div>
         <div className="input">
           <img src={person} alt="people-sign" />
           <input
             id="people"
             type="number"
-            value={people == null ? "" : people}
+            value={calcManager.people == null ? "" : calcManager.people}
             placeholder="0"
             onChange={(e) => {
-              fieldHandler(e, setPeople);
+              setCalcManager((prev)=>({...prev,people:e.target.value}))
+              setIsReseted(false)
             }}
-            className={people == 0 ? "error" : null}
+            className={calcManager.people == 0 ? "error" : null}
           />
         </div>
       </section>

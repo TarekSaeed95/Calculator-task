@@ -1,4 +1,12 @@
-function ResultArea({tipAmount,total,resetHandler,isDisabled}) {
+import { useEffect, useState } from "react";
+
+function ResultArea({tipAmount,total,setIsReseted,isReseted}) {
+  const [isDisabled, setIsDisabled] = useState(true);
+useEffect(()=>{
+  if(isReseted){
+    setIsDisabled(true)
+  }else setIsDisabled(false)
+},[isReseted])
   return (
     <section className="result-area">
       <section className="tip-amount">
@@ -20,7 +28,8 @@ function ResultArea({tipAmount,total,resetHandler,isDisabled}) {
           ${total==0?"0.00":total}
           </div>
       </section>
-      <button  onClick={resetHandler}
+      <button  
+      onClick={()=>setIsReseted(true)}
       className={isDisabled?"disabled":null}
       >
         Reset
