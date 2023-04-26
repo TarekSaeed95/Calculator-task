@@ -7,6 +7,8 @@ useEffect(()=>{
     setIsDisabled(true)
   }else setIsDisabled(false)
 },[isReseted])
+console.log(tipAmount)
+console.log(total)
   return (
     <section className="result-area">
       <section className="tip-amount">
@@ -15,7 +17,7 @@ useEffect(()=>{
             <p>/ person</p>
           </div>
           <div className="tip-result">
-            ${tipAmount==0?"0.00":tipAmount}
+            ${tipAmount.toFixed(2)}
             
           </div>
       </section>
@@ -25,12 +27,12 @@ useEffect(()=>{
             <p>/ person</p>
           </div>
           <div className="total-result">
-          ${total==0?"0.00":total}
+          ${total.toFixed(2)}
           </div>
       </section>
       <button  
       onClick={()=>setIsReseted(true)}
-      className={isDisabled?"disabled":null}
+      className={isDisabled===true&&"disabled"}
       >
         Reset
       </button>
