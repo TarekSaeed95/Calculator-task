@@ -14,9 +14,21 @@ function ManageArea({ setTipAmount, setTotal, isReseted, setIsReseted }) {
 
   useEffect(() => {
     if (bill > 0 && tip > -1 && people > 0) {
-      tip==0?setTipAmount(0):setTipAmount((bill * (tip/100)) / 1 / people);
-      tip==0?setTotal((bill  / people + bill / people)):setTotal((bill *  (tip / 100)) / people + bill / people);
-      // setTotal((bill *  (tip!=0 ? (tip / 100):1)) / people + bill / people);
+      // const tipAmount=tip==0?0:(bill * (tip/100)) / 1 / people
+      let tipAmount=0;
+      let total=0;
+      if(tip==0){
+         tipAmount=0
+        total=bill  / people + bill / people
+      }else {
+        tipAmount=(bill * (tip/100)) / people
+        total=tipAmount+bill/people
+      }
+
+      setTipAmount(tipAmount)
+      setTotal(total)
+      // setTotal=
+      // tip==0?setTotal((bill  / people + bill / people)):setTotal((bill *  (tip / 100)) / people + bill / people);
     }
   }, [calcManager]);
 
