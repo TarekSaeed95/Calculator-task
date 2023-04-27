@@ -3,7 +3,7 @@ import person from "../assets/images/icon-person.svg";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import PropTypes from "prop-types";
 
-function ManageArea({ setTipAmount, setTotal, isReseted, setIsReseted }) {
+function ManageArea({ setTipAmount, setTotal, isReseted=true, setIsReseted }) {
   const [calcManager, setCalcManager] = useState({
     tip: 0,
     people: null,
@@ -71,8 +71,8 @@ function ManageArea({ setTipAmount, setTotal, isReseted, setIsReseted }) {
               tipClickHandler(e, index);
             }}
           >
-            <label htmlFor={tipNum}>{tip}%</label>
             <input type="radio" name="tip" value={tip} id={tipNum} hidden />
+            <label htmlFor={tipNum}>{tip}%</label>
           </div>
         ) : (
           <div className="custom-btn btn" key={index}>
@@ -95,13 +95,13 @@ function ManageArea({ setTipAmount, setTotal, isReseted, setIsReseted }) {
       <section className="bill">
         <div className="text">
           <label htmlFor="bill">Bill</label>
-          {bill === 0 && <span className="error">can&apos;t be zero</span>}
+          <span>can&apos;t be zero</span>
         </div>
-
-        <div className="input">
+        <div className="input" >
           <img src={dollar} alt="dollar-sign" />
           <input
             id="bill"
+            min={1}
             type="number"
             onChange={(e) => {
               setCalcManager((prev) => ({ ...prev, bill: +e.target.value }));
@@ -109,7 +109,6 @@ function ManageArea({ setTipAmount, setTotal, isReseted, setIsReseted }) {
             }}
             value={bill === null ? "" : bill}
             placeholder="0"
-            className={bill === 0 ? "error" : null}
           />
         </div>
       </section>
@@ -122,20 +121,20 @@ function ManageArea({ setTipAmount, setTotal, isReseted, setIsReseted }) {
       <section className="people">
         <div className="text">
           <label htmlFor="people">Number of People</label>
-          {people === 0 && <span className="error">can&apos;t be zero</span>}
+           <span>can&apos;t be zero</span>
         </div>
         <div className="input">
           <img src={person} alt="people-sign" />
           <input
             id="people"
             type="number"
+            min={1}
             value={people === null ? "" : people}
             placeholder="0"
             onChange={(e) => {
               setCalcManager((prev) => ({ ...prev, people: +e.target.value }));
               setIsReseted(false);
             }}
-            className={people === 0 ? "error" : null}
           />
         </div>
       </section>

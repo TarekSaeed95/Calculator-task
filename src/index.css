@@ -109,12 +109,12 @@ width: 100%;
 text-align: center;
 margin: 0;
 }
-.manage-area .tip-group .btn.choosed{
+.manage-area .tip-group .btn.choosed {
   background-color: var(--main-color) !important;
 }
+
 .manage-area .tip-group .btn.choosed label{
   color: var(--dark-cyan) !important;
-
 }
 .manage-area .tip-group .btn:hover{
   background-color: var(--light-grayish-cyan);
@@ -148,11 +148,13 @@ margin: 0;
   color: var(--dark-cyan);
   text-align: right;
 }
-
-.manage-area input.error{
+.manage-area .text span{
+  display: none;
+}
+.manage-area input:invalid{
 outline: 0.125rem solid #b87b6a;
 }
-span.error{
+.manage-area .text:has(+ .input input:invalid) span{
   display: inline;
   color: #b87b6a;
   font-size: 1rem;
